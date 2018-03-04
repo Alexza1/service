@@ -6,8 +6,6 @@ flaska = 0
 if flaska == 0: 
     try:
         from flask import Flask
-        app = Flask(__name__)
-        count = 0
         flaska = 1
     except:
         os.system("pip install flask")
@@ -16,6 +14,8 @@ else:
     pass
 
 from flask import Flask
+app = Flask(__name__)
+count = 0
 
 def increment_counter():
     global count
