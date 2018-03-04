@@ -1,9 +1,10 @@
+# following will not cresh if module flaske don't exist. it will install it from the execption
 import os
-from flask import Flask
 
 flaska = 0
 if flaska == 0: 
     try:
+        from flask import Flask
         app = Flask(__name__)
         count = 0
         flaska = 1
