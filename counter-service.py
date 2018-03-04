@@ -4,23 +4,19 @@ from flask import Flask
 app = Flask(__name__)
 count = 0
 
-# for testing on windows
-# todo: create a file where the counter will write the posts you should GET from this file
-
-
 def increment_counter():
     global count
     count = count + 1
 
 
-# post method and increment by one for each post
+# post method and increment by one for each post request
 @app.route('/counter', methods=['POST'])
 def post_counter():
-    increment_counter()
-    return "incremented counter by 1"
+    increment_counter() #"incremented counter by 1"
+    return
 
 
-# get method output the number of post requests 
+# get method display the number of post requests 
 @app.route('/counter', methods=['GET'])
 def get_counter():
     return "POST Counter result: %d" % count
