@@ -13,6 +13,7 @@ if flaska == 0:
         flaska = 0
 else:
     pass
+    return from flask import Flask
 
 def increment_counter():
     global count
