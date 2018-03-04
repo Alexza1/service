@@ -1,4 +1,5 @@
-# following will not cresh if module flaske don't exist. it will install it from the execption
+# following will not cresh if module flask doesn't exists. it will install it from the execption
+# and the import of the module will be defined just after this block
 import os
 
 flaska = 0
@@ -13,7 +14,8 @@ if flaska == 0:
         flaska = 0
 else:
     pass
-    return from flask import Flask
+
+from flask import Flask
 
 def increment_counter():
     global count
