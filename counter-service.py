@@ -24,7 +24,7 @@ def get_counter():
 
 if __name__ == "__main__":
     try:
-        port_number = 443
+        port_number = 8080
         app.run(debug=True, host="", port=port_number)
 
     except Exception as e:
