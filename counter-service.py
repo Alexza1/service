@@ -1,19 +1,6 @@
-# following will not cresh if module flask doesn't exists. it will install it from the execption
-# and the import of the module will be defined just after this block
 import os
-
-flaska = 0
-if flaska == 0: 
-    try:
-        from flask import Flask
-        flaska = 1
-    except:
-        os.system("pip install flask")
-        flaska = 0
-else:
-    pass
-
 from flask import Flask
+
 app = Flask(__name__)
 count = 0
 
@@ -37,7 +24,7 @@ def get_counter():
 
 if __name__ == "__main__":
     try:
-        host_name = "10.100.102.215"
+        host_name = ""
         port_number = 443
         app.run(debug=True, host=host_name, port=port_number)
 
