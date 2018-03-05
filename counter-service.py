@@ -13,7 +13,7 @@ def increment_counter():
 @app.route('/counter', methods=['POST'])
 def post_counter():
     increment_counter() #"incremented counter by 1"
-    return
+    return "Increment counter by 1"
 
 
 # get method display the number of post requests 
@@ -24,9 +24,8 @@ def get_counter():
 
 if __name__ == "__main__":
     try:
-        host_name = "localhost"
         port_number = 443
-        app.run(debug=True, host=host_name, port=port_number)
+        app.run(debug=True, host='localhost', port=port_number)
 
     except Exception as e:
         if 'getaddrinfo failed' in e:
