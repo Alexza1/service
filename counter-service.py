@@ -25,7 +25,7 @@ def get_counter():
 if __name__ == "__main__":
     try:
         port_number = 443
-        app.run(debug=True, host=localhost, port=port_number)
+        app.run(debug=True, host="", port=port_number)
 
     except Exception as e:
         if 'getaddrinfo failed' in e:
