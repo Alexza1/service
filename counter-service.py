@@ -24,7 +24,7 @@ def get_counter():
 
 if __name__ == "__main__":
     try:
-        host_name = ""
+        host_name = "localhost"
         port_number = 443
         app.run(debug=True, host=host_name, port=port_number)
 
