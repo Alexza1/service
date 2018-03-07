@@ -44,7 +44,7 @@ def write_file(count):
 next if checking if the counter-service.log file exists for continue the counting process 
 """
 if os.path.isfile(service_path):
-    read_file()
+    count = read_file()
 else:
     write_file(count)
 
