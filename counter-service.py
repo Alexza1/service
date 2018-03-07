@@ -12,8 +12,8 @@ Description:
     and running.
 
 Example:
-	POST -> http://localhost:8443/counter -> Return: Increment counter by 1
-	GET -> http://localhost:8443/counter -> Return: POST Counter result: 6
+	POST -> http://localhost:8443/counter -> Return: "Increment counter by 1"
+	GET -> http://localhost:8443/counter -> Return: "POST Counter result: 6"
 	
 """
 import os
