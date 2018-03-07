@@ -1,4 +1,5 @@
 """
+
 Prerequisites:
     pip install flask
 
@@ -10,6 +11,10 @@ Description:
     and if the service will fail or restarted, it will continue the counting from the last time that the service was up
     and running.
 
+Example:
+	POST -> http://localhost:8443/counter -> Return: Increment counter by 1
+	GET -> http://localhost:8443/counter -> Return: POST Counter result: 6
+	
 """
 import os
 from flask import Flask
@@ -18,13 +23,17 @@ app = Flask(__name__)
 count = 0  # this will be used for the first time only
 service_path = "/var/lib/jenkins/workspace/Micro_Service_Post_Counter/service/counter-service.log"
 
-
+"""
+'def read_file' method read and return the post requests number from counter-service.log
+"""
 def read_file():
     counter = open(service_path, "r")
     count_r = int(counter.read().split(" ")[-1])
     return count_r
 
-
+"""
+'def write_file' method write the incremention by 1 every post request to counter-service.log
+"""
 def write_file(count):
     counter_file = open(service_path, "w")
     counter_file.write("Increment counter by " + str(count))
@@ -60,7 +69,7 @@ def post_counter():
 
 
 """
-'get_counter' method displays the number of post requests from the counter-service.log
+'def get_counter' method displays the number of post requests from the counter-service.log
 """
 
 @app.route('/counter', methods=['GET'])
