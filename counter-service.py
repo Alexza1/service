@@ -10,18 +10,26 @@ Description:
     this service is about to create a log file in the service_path to keep the requests number,
     and if the service will fail or restarted, it will continue the counting from the last time that the service was up
     and running.
+    ERROR logs of the service will be written to "/var/log/counter-service-error.log"
 
 Example:
-	POST -> http://localhost:8443/counter -> Return: "Increment counter by 1"
-	GET -> http://localhost:8443/counter -> Return: "POST Counter result: 6"
-	
+        POST -> http://localhost:8443/counter -> Return: "Increment counter by 1"
+        GET -> http://localhost:8443/counter -> Return: "POST Counter result: 6"
+
 """
 import os
+import logging
 from flask import Flask
 
 app = Flask(__name__)
+service_error_log_file = "/var/log/counter-service-error.log"
+logging.basicConfig(filename=service_error_log_file, level=logging.DEBUG)
 count = 0  # this will be used for the first time only
+hostname_or_ip = ""  # hostname or ip address for reaching to host
+port_number = 8443  # port number that the service will be listening on
+host_partition = "/counter"  # the folder name for sending and receiving POST and GET requests
 service_path = "/var/lib/jenkins/workspace/Micro_Service_Post_Counter/service/counter-service.log"
+
 
 """
 'def read_file' method read and return the post requests number from counter-service.log
@@ -40,16 +48,24 @@ def write_file(count):
     counter_file.close()
 
 
-"""  
-next if checking if the counter-service.log file exists for continue the counting process 
+"""
+next if checking if the counter-service.log file exists for continue the counting process
 """
 if os.path.isfile(service_path):
     count = read_file()
 else:
     write_file(count)
 
-""" 
-'def increment_counter' is incrementing the count value by 1 
+
+"""
+next if checking if the file counter-service-error.log exists for serive error logs and creates this file if not
+"""
+if os.path.isfile(service_error_log_file) == False:
+    error_logs = open(service_error_log_file, "w")
+    error_log.close()
+
+"""
+'def increment_counter' is incrementing the count value by 1
 """
 
 def increment_counter():
@@ -58,11 +74,11 @@ def increment_counter():
     write_file(count)
 
 
-""" 
+"""
 'post_counter' method increment by 1 for each post request by using the 'def increment_counter'
 """
 
-@app.route('/counter', methods=['POST'])
+@app.route(host_partition, methods=['POST'])
 def post_counter():
     increment_counter()
     return "Increment counter by 1"
@@ -72,7 +88,7 @@ def post_counter():
 'def get_counter' method displays the number of post requests from the counter-service.log
 """
 
-@app.route('/counter', methods=['GET'])
+@app.route(host_partition, methods=['GET'])
 def get_counter():
     count_r = read_file()
     return "POST Counter result: %d" % count_r
@@ -80,8 +96,7 @@ def get_counter():
 
 if __name__ == "__main__":
     try:
-        port_number = 8443  # port number that the service will be listening on
-        app.run(debug=True, host="", port=port_number)
+        app.run(debug=True, host=hostname_or_ip, port=port_number)
 
     except Exception as e:
         if 'getaddrinfo failed' in e:
