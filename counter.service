@@ -1,0 +1,9 @@
+[Unit]
+Desctiption = counter service post requests
+After = networking.service
+Requires = networking.service
+
+[Service]
+ExecStart = /usr/bin/python /var/lib/jenkins/workspace/Micro_Service_Post_Counter/service/counter-service.py
+Restart = on-failure
+RestartSec = 2
