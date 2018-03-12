@@ -1,5 +1,5 @@
 [Unit]
-Desctiption = counter service post requests
+Description = counter service post requests
 After = networking.service
 Requires = networking.service
 
