@@ -16,6 +16,6 @@ systemctl daemon-reload
 echo systemctl daemon-reload done
 echo " "
 echo ====================================================
-echo ! counter-servicee is ready to be used as aservice !
+echo ! counter-servicee is ready to be used as a service!
 echo ====================================================
 echo " "
